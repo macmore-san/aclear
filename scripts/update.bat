@@ -27,7 +27,8 @@ echo [2/5] Backing up the database...
 php artisan app:backup || goto :failup
 
 echo [3/5] Installing new files...
-tar.exe -x -f "%ZIP%" -C "%APP%" || goto :failup
+rem Full path: a bare `tar` can resolve to Git's GNU tar, which can't read Windows paths.
+"%SystemRoot%\System32\tar.exe" -x -f "%ZIP%" -C "%APP%" || goto :failup
 
 echo [4/5] Updating the database...
 php artisan migrate --force || goto :failup

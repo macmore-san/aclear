@@ -56,8 +56,10 @@ try {
 
     New-Item -ItemType Directory -Force $dist | Out-Null
     if (Test-Path $zip) { Remove-Item $zip -Force }
-    # tar.exe (bsdtar, built into Windows 10+) keeps dotfiles like public\.htaccess and handles long vendor paths.
-    Invoke-Step 'Zipping' { tar.exe -a -c -f $zip -C $work . }
+    # Windows' own bsdtar keeps dotfiles like public\.htaccess and handles long vendor paths. Full path:
+    # a bare `tar` can resolve to Git's GNU tar, which reads `C:\...` as a remote host.
+    $tar = Join-Path $env:SystemRoot 'System32\tar.exe'
+    Invoke-Step 'Zipping' { & $tar -a -c -f $zip -C $work . }
 
     Write-Host "Release ready: $zip"
 }
