@@ -24,7 +24,7 @@ export function NavMain({ items }: { items: MenuItem[] }) {
 
     return (
         <SidebarGroup className="px-2 py-0">
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupLabel>Register</SidebarGroupLabel>
             {/* Ledger rule: every top-level row is divided, not just spaced. */}
             <SidebarMenu className="gap-0">
                 {items.map((item) =>

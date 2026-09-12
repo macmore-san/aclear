@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->seedMenus();
         $this->seedRolesAndUsers();
+        $this->call(DtrMenuSeeder::class);
     }
 
     private function seedMenus(): void

@@ -1,55 +1,152 @@
-# Design
+---
+name: AClear DTR
+description: An operate-mode payroll DTR dashboard for a water refilling station, on an ocean-blue/sea-green accent system
+colors:
+    background: '#f4f7f9'
+    foreground: '#1e293b'
+    card: '#ffffff'
+    primary: '#0088cc'
+    primary-foreground: '#ffffff'
+    secondary-accent: '#20b2aa'
+    secondary: '#e9eef2'
+    muted-foreground: '#64748b'
+    border: '#d9e1e7'
+    destructive: '#dc2626'
+    status-on: '#20b2aa'
+    status-off: '#f59e0b'
+    sidebar: '#1a2530'
+    sidebar-foreground: '#e7ecef'
+typography:
+    display:
+        fontFamily: 'Author, ui-sans-serif, system-ui, sans-serif'
+        fontSize: '1.25rem'
+        fontWeight: 700
+        lineHeight: 1.2
+        letterSpacing: '-0.01em'
+    body:
+        fontFamily: 'Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif'
+        fontSize: '0.875rem'
+        fontWeight: 400
+        lineHeight: 1.5
+    label:
+        fontFamily: 'Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif'
+        fontSize: '0.6875rem'
+        fontWeight: 500
+        letterSpacing: '0.14em'
+    data:
+        fontFamily: 'Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif'
+        fontSize: '0.75rem'
+        fontWeight: 500
+rounded:
+    lg: '0.5rem'
+    md: 'calc(0.5rem - 2px)'
+    sm: 'calc(0.5rem - 4px)'
+spacing:
+    sm: '0.5rem'
+    md: '1rem'
+    lg: '1.5rem'
+components:
+    button-primary:
+        backgroundColor: '{colors.primary}'
+        textColor: '{colors.primary-foreground}'
+        rounded: '{rounded.md}'
+        padding: '0.5rem 1rem'
+    button-secondary:
+        backgroundColor: '{colors.secondary}'
+        textColor: '{colors.foreground}'
+        rounded: '{rounded.md}'
+        padding: '0.5rem 1rem'
+    register-header:
+        backgroundColor: '{colors.card}'
+        textColor: '{colors.foreground}'
+        typography: '{typography.display}'
+        rounded: '{rounded.sm}'
+        padding: '1rem 1.25rem'
+    sidebar:
+        backgroundColor: '{colors.sidebar}'
+        textColor: '{colors.sidebar-foreground}'
+---
 
-<!-- impeccable:design-schema 1 -->
+# Design System: AClear DTR
 
-## World
+## Overview
 
-**The permission ledger.** The admin shell reads as rows and columns of database truth, not a friendly SaaS dashboard: hairline rules replace card shadows as the primary separator, tabular data sets in a real monospace, status and structure show as ruled lists rather than pills and cards. It deliberately refuses the soft-card, pastel-icon, rounded-everything look most AI-generated admin panels default to.
+**Client-specified brand system**, superseding the earlier "Sanitary Permit Register" world (cream ledger paper, one seal-teal accent, serif record titles) that shipped first. That world is retired outright, not blended: this is a client-provided palette and typography spec — Ocean Blue primary, Light Sea Green secondary accent, ice-white canvas, a fixed dark-navy sidebar, Author display type over Plus Jakarta Sans body — applied as the system's new visual identity while every structural pattern the product already relied on (the document-header masthead, ruled tables, the status-seal glyph) is preserved unchanged underneath it, since the request was to restyle the surface, not to re-architect it.
 
-Chosen via `impeccable concept-seed --scope direction --mode operate` (seed key `c084df05`), grounded candidate #3 ("permission matrix / ledger"), raised against three declined challengers: the seven-segment display family (an off/unlit state is drawn as deliberately as a lit one — informs the hollow-vs-filled status language), Ikeda's _datamatics_ (tabular-numeral rigor, hairline rule discipline), and Kraftwerk's _Man-Machine_ (one disciplined accent color, reserved for state, never decoration). Full contract: `.impeccable/surfaces/app-shell.md`.
+No finish-review pass has run (no browser tooling available in this environment) — this file documents the shipped tokens directly; treat visual QA as an open item.
 
-## Palette
+**Key Characteristics:**
 
-Restrained strategy — neutrals plus one accent, both themes a true paper/ink inversion (not a dimmed light theme):
+- Ice-white canvas (`#f4f7f9`) with pure-white cards and one Ocean Blue primary accent
+- Light Sea Green as the second, cooler accent for charts, metrics, and highlight items — never competing with primary for the same role
+- A fixed dark-navy sidebar (`#1a2530`) in both light and dark theme — a stable structural panel, not theme-inverted
+- Author (700) for headings, Plus Jakarta Sans for everything else, including data values
+- Flat throughout — no drop shadows, no gradients (inherited, unchanged)
 
-| Token                           | Light                               | Dark                                    |
-| ------------------------------- | ----------------------------------- | --------------------------------------- |
-| `--background` / `--foreground` | `oklch(1 0 0)` / `oklch(0.145 0 0)` | `oklch(0.145 0 0)` / `oklch(0.985 0 0)` |
-| `--primary` (the one accent)    | `oklch(0.47 0.16 257)`              | `oklch(0.75 0.14 257)`                  |
-| `--border` / `--input`          | `oklch(0.87 0 0)`                   | `oklch(0.32 0 0)`                       |
-| `--sidebar`                     | `oklch(0.99 0 0)`                   | `oklch(0.12 0 0)`                       |
-| `--status-on`                   | `oklch(0.6 0.14 155)`               | `oklch(0.72 0.16 155)`                  |
+## Colors
 
-The accent (`--primary`/`--ring`) is the only saturated color in the system and appears only on primary actions, active/focus states, and the sidebar's active item — never as decoration.
+Full-palette strategy: two named accents with clearly split roles, plus a light neutral canvas.
 
-## Type
+### Primary
 
-- **Prose / UI labels:** Instrument Sans (`--font-sans`), unchanged from the stock starter kit — a workhorse grotesk, appropriate for an Operate-mode surface.
-- **Data:** IBM Plex Mono (`--font-mono`), self-hosted via the same `laravel-vite-plugin/fonts` bunny helper. Used for anything that is a database value rather than a label: emails, permission names (`users.view`), route names, badges (role tags), and table cells generally (`tabular-nums` applied at the `<table>` level so numerals align even in the sans face).
+- **Ocean Blue** (`#0088cc`, dark: `#29a3e0`): buttons, active tabs, selected states, links, focus rings. `--primary` / `--ring` / `--sidebar-primary`.
 
-## Shape & structure
+### Secondary
 
-- `--radius` reduced from shadcn's default `0.625rem` to `0.375rem` — a ledger doesn't round its corners much.
-- Hairline `border` (1px) is the primary separator everywhere; no new drop shadows were added for chrome. Existing `shadow-xs` on inputs/buttons (inherited from shadcn) was left as-is — it's a near-invisible default, not new card chrome.
-- The sidebar's top-level rows are divided by `border-b` between every item (`resources/js/components/nav-main.tsx`), not just spaced with a gap — the FIRST VIEWPORT reads as a ruled list on load.
-- Tables (`resources/js/components/ui/table.tsx`) are dense: compact row padding, hairline row/header borders, no zebra striping.
-- Badges (`resources/js/components/ui/badge.tsx`) are squarer (`rounded` not `rounded-md`) and set in mono — they carry data (role/permission names), not decorative tags.
+- **Light Sea Green** (`#20b2aa`, dark: `#2dd4cb`): graphs, metrics, highlight items, and the "on-file / complete" status-seal state (`--status-on`, `--chart-2`). Never used for buttons — that role stays Ocean Blue's alone.
 
-## Motion
+### Neutral
 
-- Buttons (`resources/js/components/ui/button.tsx`): `active:scale-[0.97]` over 160ms ease-out — press feedback on every pressable control, per Emil Kowalski's component-building principles.
-- Sidebar group chevron: 200ms ease-out rotation; group content uses Radix Collapsible's native height animation (`animate-collapsible-down/up` from `tw-animate-css`), not a custom keyframe.
-- Menu drag rows (`resources/js/pages/admin/menus.tsx`): the lifted row gets `scale(1.02)` + shadow; dnd-kit's own transform/transition handles sibling displacement.
-- `--ease-out: cubic-bezier(0.23, 1, 0.32, 1)` and `--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1)` are available as theme tokens for future motion work.
+- **Dashboard Background** (`#f4f7f9`, `--background`): the main canvas.
+- **Card / Container** (`#ffffff`, `--card`): every widget panel, masthead, and table container — a crisp step up from the canvas.
+- **Primary Text** (`#1e293b`, `--foreground`): headings, table text, core numbers.
+- **Sidebar** (`#1a2530`, `--sidebar`): fixed dark navy, same value in both themes.
+- **Status Off** (`#f59e0b`): dashed status-seal state and warning banners — pending / inactive / missing data, amber, not destructive red.
+- **Destructive** (`#dc2626`): delete actions and hard errors only.
 
-## What this pass covered
+### Named Rules
 
-Tokens (`resources/css/app.css`, `vite.config.ts`), the authenticated shell (`app-sidebar.tsx`, `nav-main.tsx`), and the primitives every admin page shares: `button`, `badge`, `table`. The four admin pages (users/roles/permissions/menus) inherit the system entirely through those shared components — no page was hand-restyled individually.
+**The Two-Accent Split.** Ocean Blue owns every interactive/selection role (buttons, active tabs, links, focus). Light Sea Green owns every data/measurement role (chart series, metric highlights, the "on" status seal). A component never uses both accents for the same purpose.
 
-**Explicitly out of scope for this pass** (per the "tokens + shell + core primitives" scope the user chose over an exhaustive pass): the public `welcome.tsx` marketing page (a Persuade surface, different mode — would need its own direction round), the auth screens (login/forgot-password/etc.), and the settings pages. They still render correctly against the new tokens (shared CSS variables), just without deliberate ledger-specific treatment of their own components.
+**The Fixed-Sidebar Rule.** The sidebar is dark navy (`--sidebar` / `--sidebar-foreground` etc.) in both light and dark mode — it does not invert with the theme toggle, unlike every other surface.
 
-## Verification
+## Typography
 
-- `impeccable detect --json` over every changed file: no findings.
-- Screenshots captured via a Playwright script (login as Super Admin, `/admin/users` and `/admin/menus`) at desktop light, desktop dark, and mobile light — reviewed inline, not through the finish-reviewer subagent (out of scope for this pass; recommended before this direction ships beyond a starter kit).
-- No comp round: no image generation was available in this environment, so the build is code-led per `new-work.md` — ambition is carried by the direction contract above, not an approved reference image.
+**Display Font:** Author, 700 (with system-ui fallback), loaded from Fontshare — not in the Google Fonts catalog, so it ships via a direct `<link>` in `app.blade.php` rather than the project's usual self-hosted `@fonts` pipeline.
+**Body Font:** Plus Jakarta Sans (with system-ui fallback), self-hosted via the existing bunny-fonts Vite plugin.
+
+### Hierarchy
+
+- **Display** (700, `text-xl`/`text-2xl`, tight tracking): `font-serif` (the CSS variable name kept from the prior world; it now resolves to Author) — record titles inside `RegisterHeader` and page/dialog headings.
+- **Label** (500, 11px, tracked uppercase): masthead meta lines and stat-cell labels.
+- **Body** (400, 14px): default UI text, descriptions, table prose cells.
+- **Data** (500, 12px, `tabular-nums`): every emp_code, time, hours figure, and count — same face as body copy now (no separate mono face), weight bumped to 500 so figures still stand slightly apart from prose in the same table.
+
+## Layout, Elevation, Shapes, Components
+
+Unchanged from the prior world except where noted below — this was a token-level restyle, not a structural rebuild:
+
+- Single-column page shells with a `RegisterHeader` masthead first on every page; the DTR screen keeps its two-column filter-rail + preview layout.
+- Flat depth model: blocks are set apart by a 1px `border` + `bg-card`, never a `box-shadow`.
+- `--radius` raised from `0.25rem` to `0.5rem` — the client's ocean-blue/sea-green system reads as a standard dashboard product, not a printed form, so corners soften accordingly. `rounded-lg`/`md`/`sm` derive from it as before.
+- `StatusSeal` (`resources/js/components/status-seal.tsx`) is unchanged in structure (filled ring = on-file, dashed ring = pending) and now draws in Light Sea Green / amber instead of the old green/amber pair.
+- `RegisterHeader`, ruled tables, and `nav-main.tsx`'s divided sidebar rows are unchanged in markup; they inherit the new tokens automatically.
+
+## Do's and Don'ts
+
+### Do:
+
+- **Do** use Ocean Blue only for buttons, active tabs, selected states, links, and focus rings.
+- **Do** use Light Sea Green only for graphs, metrics, and highlight/status-on items.
+- **Do** keep the sidebar dark navy in both themes.
+- **Do** set headings in Author (700) and everything else in Plus Jakarta Sans.
+
+### Don't:
+
+- **Don't** reintroduce a second display face or reach for the old Zilla Slab / Roboto Mono stack — both are fully retired.
+- **Don't** let the sidebar invert with the light/dark toggle — it is a fixed navy panel by design.
+- **Don't** add drop shadows or gradients — the flat depth model carries over from the prior world unchanged.
+
+## Not canonized
+
+This redesign covers color tokens, typography, and the sidebar/radius adjustments called out above. It does not touch copy, information architecture, or the underlying structural components (masthead, ruled tables, status seal) — those were preserved deliberately, per the request, rather than re-evaluated. No finish-reviewer pass has run (no browser tooling in this environment); treat visual QA as an open item.
