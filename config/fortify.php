@@ -161,7 +161,8 @@ return [
     */
 
     'features' => [
-        Features::resetPasswords(),
+        // No resetPasswords(): on-premise install has no mail server — the
+        // Super Admin resets passwords from Access Control → Users instead.
         Features::emailVerification(),
         Features::twoFactorAuthentication([
             'confirm' => true,

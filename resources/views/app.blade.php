@@ -34,11 +34,7 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        {{-- Author isn't in the Google Fonts catalog, so it can't go through
-             the self-hosted @fonts pipeline (bunny mirrors Google Fonts only)
-             — loaded from Fontshare directly instead. --}}
-        <link rel="preconnect" href="https://api.fontshare.com">
-        <link href="https://api.fontshare.com/v2/css?f[]=author@700&display=swap" rel="stylesheet">
+        <link rel="preload" href="/fonts/author-700.woff2" as="font" type="font/woff2" crossorigin>
 
         @fonts
 

@@ -24,4 +24,12 @@ return [
     // Format assumed when a CSV file's sTime column is ambiguous (dd/mm vs mm/dd cannot be
     // told apart because every value is <= 12) or mixes both — imported instead of rejected.
     'ambiguous_date_format' => env('DTR_CSV_DATE_FORMAT', 'dmy'),
+
+    // `php artisan app:backup` — read here, not via env() in the command, because
+    // production caches config and env() returns null outside config files.
+    'backup' => [
+        'path' => env('BACKUP_PATH') ?: storage_path('app/backups'),
+        'keep_days' => (int) env('BACKUP_KEEP_DAYS', 30),
+        'mysqldump' => env('MYSQLDUMP_PATH') ?: 'mysqldump',
+    ],
 ];

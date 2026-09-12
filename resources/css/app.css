@@ -7,6 +7,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Self-hosted (Fontshare, ITF Free Font License) so headings survive the shop's internet dropping. */
+@font-face {
+    font-family: 'Author';
+    src: url('/fonts/author-700.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 @theme {
     --font-sans:
         'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif,

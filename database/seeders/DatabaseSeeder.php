@@ -39,6 +39,12 @@ class DatabaseSeeder extends Seeder
         $superAdmin = Role::create(['name' => 'Super Admin']);
         Role::create(['name' => 'User']);
 
+        // Demo accounts use Faker (a dev dependency) and a known password —
+        // production creates its admin with `php artisan app:create-admin`.
+        if (! app()->isLocal()) {
+            return;
+        }
+
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',

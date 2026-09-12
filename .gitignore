@@ -1,4 +1,5 @@
 /.phpunit.cache
+/dist
 /bootstrap/ssr
 /node_modules
 /public/build
