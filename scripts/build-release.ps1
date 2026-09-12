@@ -39,6 +39,7 @@ try {
         '.env', '.env.example', 'CLAUDE.md', 'DESIGN.md', 'PRODUCT.md', 'README.md',
         'phpunit.xml', 'phpstan.neon', 'pint.json', 'vite.config.ts', 'tsconfig.json',
         'package.json', 'package-lock.json', 'components.json', 'skills-lock.json', '.editorconfig',
+        '.gitattributes', '.gitignore', '.npmrc',
         '.impeccable', '.claude', '.agents', 'public\hot', 'public\fonts-manifest.dev.json'
     )
     foreach ($path in $strip) {
