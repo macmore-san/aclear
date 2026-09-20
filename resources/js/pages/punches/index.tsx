@@ -141,7 +141,7 @@ export default function PunchesIndex({
                 meta={`${displayedTotal.toLocaleString()} punch record${total === 1 ? '' : 's'} on file`}
             />
 
-            <div className="border-border bg-card rounded-sm border p-5">
+            <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm rounded-2xl border p-5">
                 <button
                     type="button"
                     tabIndex={uploading ? -1 : 0}
@@ -166,7 +166,7 @@ export default function PunchesIndex({
                             addFiles(Array.from(e.dataTransfer.files));
                     }}
                     className={cn(
-                        'focus-visible:ring-ring flex cursor-pointer flex-col items-center gap-2 rounded-sm border-2 border-dashed px-6 py-10 text-center transition-colors focus-visible:ring-2 focus-visible:outline-none',
+                        'focus-visible:ring-ring flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-colors focus-visible:ring-2 focus-visible:outline-none',
                         uploading && 'cursor-not-allowed opacity-50',
                         dragOver
                             ? 'border-primary bg-primary/5'
@@ -204,7 +204,7 @@ export default function PunchesIndex({
                         {files.map((f, i) => (
                             <li
                                 key={i}
-                                className="border-border flex items-center justify-between rounded-sm border border-dashed px-3 py-2 text-sm"
+                                className="border-border flex items-center justify-between rounded-2xl border border-dashed px-3 py-2 text-sm"
                             >
                                 <span className="truncate">{f.name}</span>
                                 <button
@@ -246,7 +246,7 @@ export default function PunchesIndex({
                     <div
                         role="alert"
                         aria-live="polite"
-                        className="border-destructive/30 bg-destructive/10 text-destructive mt-4 flex items-start gap-2 rounded-sm border px-3 py-2 text-sm"
+                        className="border-destructive/30 bg-destructive/10 text-destructive mt-4 flex items-start gap-2 rounded-2xl border px-3 py-2 text-sm"
                     >
                         <OctagonAlert className="mt-0.5 size-4 shrink-0" />
                         <span>{networkOrServerError}</span>
@@ -257,7 +257,7 @@ export default function PunchesIndex({
             {results && (
                 <div
                     aria-live="polite"
-                    className="border-border overflow-hidden rounded-sm border"
+                    className="border-border overflow-hidden rounded-2xl border"
                 >
                     <div className="border-border bg-secondary/50 border-b px-4 py-2.5 text-xs font-medium tracking-wide uppercase">
                         Import result
@@ -325,7 +325,7 @@ export default function PunchesIndex({
                                     </div>
 
                                     {r.date_format_assumed && (
-                                        <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-sm border px-3 py-2 text-xs">
+                                        <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-2xl border px-3 py-2 text-xs">
                                             <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
                                             <span>
                                                 The date format in this file was
@@ -342,7 +342,7 @@ export default function PunchesIndex({
 
                                     {(r.skipped_no_time > 0 ||
                                         r.skipped_unparsable > 0) && (
-                                        <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-sm border px-3 py-2 text-xs">
+                                        <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-2xl border px-3 py-2 text-xs">
                                             <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
                                             <span>
                                                 {r.skipped_no_time > 0 && (
@@ -370,7 +370,7 @@ export default function PunchesIndex({
                 </div>
             )}
 
-            <div className="border-border bg-card flex items-center justify-between rounded-sm border px-5 py-4">
+            <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm flex items-center justify-between rounded-2xl border px-5 py-4">
                 <div className="flex items-center gap-2 text-sm">
                     <ClipboardList className="text-muted-foreground size-4" />
                     Next: fix any employee missing a start time, then print

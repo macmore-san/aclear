@@ -140,7 +140,7 @@ export default function EmployeesIndex({
             />
 
             {missingStartTime > 0 && (
-                <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-sm border px-4 py-3 text-sm">
+                <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-2xl border px-4 py-3 text-sm">
                     <AlertTriangle className="mt-0.5 size-4 shrink-0" />
                     <span>
                         <strong>{missingStartTime}</strong> active employee
@@ -159,7 +159,7 @@ export default function EmployeesIndex({
             />
 
             {roster.length === 0 ? (
-                <div className="border-border bg-card rounded-sm border px-6 py-12 text-center">
+                <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm rounded-2xl border px-6 py-12 text-center">
                     <p className="font-serif text-lg font-semibold">
                         No employees on file yet
                     </p>
@@ -175,7 +175,7 @@ export default function EmployeesIndex({
                     </Button>
                 </div>
             ) : (
-                <div className="border-border overflow-hidden rounded-sm border">
+                <div className="border-border overflow-hidden rounded-2xl border">
                     <Table>
                         <TableHeader>
                             <TableRow className="border-b-2">

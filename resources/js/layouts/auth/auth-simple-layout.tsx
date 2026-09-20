@@ -8,12 +8,12 @@ export default function AuthSimpleLayout({
     description,
 }: AuthLayoutProps) {
     return (
-        <div className="bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+        <div className="bg-background flex min-h-svh flex-col items-center justify-center gap-6 bg-[radial-gradient(ellipse_at_bottom_left,color-mix(in_oklab,var(--primary)_35%,transparent),transparent_60%),linear-gradient(100deg,color-mix(in_oklab,var(--primary)_55%,white)_0%,color-mix(in_oklab,var(--primary)_12%,white)_45%,white_75%)] p-6 md:p-10 dark:bg-none">
             <div className="w-full max-w-sm">
                 {/* The register masthead — the same header block every
                     authenticated page opens on, so the login screen already
                     reads as this system's document, not a generic auth form. */}
-                <div className="border-border bg-card rounded-sm border">
+                <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm rounded-2xl border">
                     <div className="border-border flex flex-col items-center gap-3 border-b px-6 py-8 text-center">
                         <Link
                             href={home()}

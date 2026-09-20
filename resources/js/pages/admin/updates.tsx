@@ -83,7 +83,7 @@ export default function Updates({
                 description="Install a new AClear release. The app goes offline for a few minutes while it installs, and the database is backed up first."
             />
 
-            <div className="border-border bg-card flex items-center gap-3 rounded-lg border px-5 py-4">
+            <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm flex items-center gap-3 rounded-lg border px-5 py-4">
                 <Package className="text-primary size-5 shrink-0" />
                 <div>
                     <p className="text-sm font-medium">
@@ -118,7 +118,7 @@ export default function Updates({
             {status?.state === 'failed' && <Failure status={status} />}
 
             {can('updates.create') && !running && (
-                <div className="border-border bg-card space-y-4 rounded-lg border p-5">
+                <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm space-y-4 rounded-lg border p-5">
                     <div>
                         <label
                             htmlFor="release"
@@ -133,7 +133,7 @@ export default function Updates({
                     </div>
 
                     {maxUploadMb > 0 && maxUploadMb < 128 && (
-                        <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-sm border px-3 py-2 text-xs">
+                        <div className="border-status-off/40 bg-status-off/10 text-status-off flex items-start gap-2 rounded-2xl border px-3 py-2 text-xs">
                             <AlertTriangle
                                 className="mt-0.5 size-3.5 shrink-0"
                                 aria-hidden="true"

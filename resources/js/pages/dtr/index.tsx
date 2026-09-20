@@ -167,7 +167,7 @@ export default function DtrIndex({ employees }: { employees: Employee[] }) {
 
             <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
                 <div className="space-y-4">
-                    <div className="border-border bg-card space-y-3 rounded-sm border p-4">
+                    <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm space-y-3 rounded-2xl border p-4">
                         <Label className="text-muted-foreground text-xs tracking-wide uppercase">
                             Cut-off
                         </Label>
@@ -242,7 +242,7 @@ export default function DtrIndex({ employees }: { employees: Employee[] }) {
                         </div>
                     </div>
 
-                    <div className="border-border bg-card rounded-sm border">
+                    <div className="border-border bg-card/80 shadow-sm backdrop-blur-sm rounded-2xl border">
                         <div className="border-border flex items-center justify-between border-b px-4 py-2.5">
                             <Label className="text-muted-foreground text-xs tracking-wide uppercase">
                                 Staff{' '}
@@ -308,7 +308,7 @@ export default function DtrIndex({ employees }: { employees: Employee[] }) {
                 <div
                     aria-live="polite"
                     aria-busy={preview.processing}
-                    className="border-border bg-card rounded-sm border"
+                    className="border-border bg-card/80 shadow-sm backdrop-blur-sm rounded-2xl border"
                 >
                     <div className="border-border flex items-center justify-between border-b px-4 py-2.5">
                         <span className="text-sm font-medium">

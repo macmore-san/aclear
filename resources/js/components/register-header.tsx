@@ -21,7 +21,7 @@ export default function RegisterHeader({
     return (
         <header
             className={cn(
-                'border-border bg-card flex flex-col gap-4 rounded-sm border px-5 py-4 sm:flex-row sm:items-end sm:justify-between',
+                'border-border bg-card/80 shadow-sm backdrop-blur-sm flex flex-col gap-4 rounded-2xl border px-5 py-4 sm:flex-row sm:items-end sm:justify-between',
                 className,
             )}
         >

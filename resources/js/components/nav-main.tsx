@@ -1,10 +1,10 @@
-import { Link } from '@inertiajs/react';
-import { ChevronRight } from 'lucide-react';
+import { Link } from "@inertiajs/react";
+import { ChevronRight } from "lucide-react";
 import {
     Collapsible,
     CollapsibleContent,
     CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+} from "@/components/ui/collapsible";
 import {
     SidebarGroup,
     SidebarGroupLabel,
@@ -14,10 +14,10 @@ import {
     SidebarMenuSub,
     SidebarMenuSubButton,
     SidebarMenuSubItem,
-} from '@/components/ui/sidebar';
-import { useCurrentUrl } from '@/hooks/use-current-url';
-import { resolveMenuIcon } from '@/lib/icons';
-import type { MenuItem } from '@/types';
+} from "@/components/ui/sidebar";
+import { useCurrentUrl } from "@/hooks/use-current-url";
+import { resolveMenuIcon } from "@/lib/icons";
+import type { MenuItem } from "@/types";
 
 export function NavMain({ items }: { items: MenuItem[] }) {
     const { isCurrentUrl, isCurrentOrParentUrl } = useCurrentUrl();
@@ -39,7 +39,7 @@ export function NavMain({ items }: { items: MenuItem[] }) {
                             )}
                             className="group/collapsible"
                         >
-                            <SidebarMenuItem className="border-sidebar-border/70 border-b last:border-b-0">
+                            <SidebarMenuItem>
                                 <CollapsibleTrigger asChild>
                                     <SidebarMenuButton
                                         tooltip={{ children: item.title }}
@@ -69,7 +69,7 @@ export function NavMain({ items }: { items: MenuItem[] }) {
                                                     }
                                                 >
                                                     <Link
-                                                        href={child.href ?? '#'}
+                                                        href={child.href ?? "#"}
                                                         prefetch
                                                     >
                                                         <span>
@@ -84,10 +84,7 @@ export function NavMain({ items }: { items: MenuItem[] }) {
                             </SidebarMenuItem>
                         </Collapsible>
                     ) : (
-                        <SidebarMenuItem
-                            key={item.id}
-                            className="border-sidebar-border/70 border-b last:border-b-0"
-                        >
+                        <SidebarMenuItem key={item.id}>
                             <SidebarMenuButton
                                 asChild
                                 isActive={
@@ -95,7 +92,7 @@ export function NavMain({ items }: { items: MenuItem[] }) {
                                 }
                                 tooltip={{ children: item.title }}
                             >
-                                <Link href={item.href ?? '#'} prefetch>
+                                <Link href={item.href ?? "#"} prefetch>
                                     {(() => {
                                         const Icon = resolveMenuIcon(item.icon);
                                         return Icon && <Icon />;
