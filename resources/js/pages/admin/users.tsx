@@ -164,6 +164,7 @@ export default function Users({ users, roles, filters }: PageProps) {
                                                 variant="ghost"
                                                 size="icon"
                                                 onClick={() => openEdit(user)}
+                                                aria-label={`Edit ${user.name}`}
                                             >
                                                 <Pencil />
                                             </Button>
@@ -172,6 +173,7 @@ export default function Users({ users, roles, filters }: PageProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
+                                                aria-label={`Delete ${user.name}`}
                                                 onClick={() =>
                                                     setDeleting(user)
                                                 }

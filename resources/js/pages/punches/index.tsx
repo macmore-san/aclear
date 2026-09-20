@@ -142,8 +142,8 @@ export default function PunchesIndex({
             />
 
             <div className="border-border bg-card rounded-sm border p-5">
-                <div
-                    role="button"
+                <button
+                    type="button"
                     tabIndex={uploading ? -1 : 0}
                     aria-disabled={uploading}
                     onClick={openBrowse}
@@ -184,19 +184,20 @@ export default function PunchesIndex({
                         .csv / .txt &middot; up to {MAX_FILES} files &middot;
                         already-imported punches are skipped automatically
                     </p>
-                    <input
-                        ref={fileRef}
-                        type="file"
-                        accept=".csv,.txt"
-                        multiple
-                        disabled={uploading}
-                        onChange={(e) => {
-                            addFiles(Array.from(e.target.files ?? []));
-                            e.target.value = '';
-                        }}
-                        className="hidden"
-                    />
-                </div>
+                </button>
+                {/* Sibling, not a child — a <button> can't legally contain an <input>. */}
+                <input
+                    ref={fileRef}
+                    type="file"
+                    accept=".csv,.txt"
+                    multiple
+                    disabled={uploading}
+                    onChange={(e) => {
+                        addFiles(Array.from(e.target.files ?? []));
+                        e.target.value = '';
+                    }}
+                    className="hidden"
+                />
 
                 {files.length > 0 && (
                     <ul className="mt-4 grid gap-1.5">
@@ -209,6 +210,7 @@ export default function PunchesIndex({
                                 <button
                                     onClick={() => removeFile(i)}
                                     disabled={uploading}
+                                    aria-label={`Remove ${f.name}`}
                                     className="text-muted-foreground hover:text-destructive ml-2 shrink-0 disabled:opacity-50"
                                 >
                                     <X className="size-3.5" />
@@ -225,7 +227,10 @@ export default function PunchesIndex({
                 >
                     {uploading ? (
                         <>
-                            <Loader2 className="size-4 animate-spin" />
+                            <Loader2
+                                className="size-4 animate-spin"
+                                aria-hidden="true"
+                            />
                             Uploading…
                         </>
                     ) : (
@@ -238,7 +243,11 @@ export default function PunchesIndex({
                 </Button>
 
                 {networkOrServerError && (
-                    <div className="border-destructive/30 bg-destructive/10 text-destructive mt-4 flex items-start gap-2 rounded-sm border px-3 py-2 text-sm">
+                    <div
+                        role="alert"
+                        aria-live="polite"
+                        className="border-destructive/30 bg-destructive/10 text-destructive mt-4 flex items-start gap-2 rounded-sm border px-3 py-2 text-sm"
+                    >
                         <OctagonAlert className="mt-0.5 size-4 shrink-0" />
                         <span>{networkOrServerError}</span>
                     </div>
@@ -246,7 +255,10 @@ export default function PunchesIndex({
             </div>
 
             {results && (
-                <div className="border-border overflow-hidden rounded-sm border">
+                <div
+                    aria-live="polite"
+                    className="border-border overflow-hidden rounded-sm border"
+                >
                     <div className="border-border bg-secondary/50 border-b px-4 py-2.5 text-xs font-medium tracking-wide uppercase">
                         Import result
                     </div>

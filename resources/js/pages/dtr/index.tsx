@@ -17,6 +17,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { useQueryState } from '@/hooks/use-query-state';
 import { cn } from '@/lib/utils';
 import { currentCutoff, previousCutoff } from '@/lib/cutoff';
 import type { BreadcrumbItem } from '@/types';
@@ -69,12 +70,13 @@ export default function DtrIndex({ employees }: { employees: Employee[] }) {
     const thisCutoff = useMemo(() => currentCutoff(), []);
     const lastCutoff = useMemo(() => previousCutoff(), []);
 
-    const [dateFrom, setDateFrom] = useState(thisCutoff.from);
-    const [dateTo, setDateTo] = useState(thisCutoff.to);
-    const [search, setSearch] = useState('');
+    const [dateFrom, setDateFrom] = useQueryState('date_from', thisCutoff.from);
+    const [dateTo, setDateTo] = useQueryState('date_to', thisCutoff.to);
+    const [search, setSearch] = useQueryState('q', '');
     const [selected, setSelected] = useState<Set<string>>(new Set());
-    const [focus, setFocus] = useState<string | null>(
-        employees[0]?.emp_code ?? null,
+    const [focus, setFocus] = useQueryState(
+        'emp_code',
+        employees[0]?.emp_code ?? '',
     );
 
     const filtered = useMemo(() => {
@@ -303,13 +305,20 @@ export default function DtrIndex({ employees }: { employees: Employee[] }) {
                     </div>
                 </div>
 
-                <div className="border-border bg-card rounded-sm border">
+                <div
+                    aria-live="polite"
+                    aria-busy={preview.processing}
+                    className="border-border bg-card rounded-sm border"
+                >
                     <div className="border-border flex items-center justify-between border-b px-4 py-2.5">
                         <span className="text-sm font-medium">
                             {result?.employee?.full_name ?? 'Preview'}
                         </span>
                         {preview.processing && (
-                            <Loader2 className="text-muted-foreground size-4 animate-spin" />
+                            <Loader2
+                                className="text-muted-foreground size-4 animate-spin"
+                                aria-hidden="true"
+                            />
                         )}
                     </div>
 

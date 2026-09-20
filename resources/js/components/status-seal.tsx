@@ -22,7 +22,11 @@ export default function StatusSeal({
                 className,
             )}
         >
-            <svg viewBox="0 0 12 12" className="size-2.5 shrink-0">
+            <svg
+                viewBox="0 0 12 12"
+                className="size-2.5 shrink-0"
+                aria-hidden="true"
+            >
                 <circle
                     cx="6"
                     cy="6"

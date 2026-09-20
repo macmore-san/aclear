@@ -28,6 +28,7 @@ import {
 } from '@/components/ui/table';
 import { useCan } from '@/hooks/use-can';
 import { useFlashToast } from '@/hooks/use-flash-toast';
+import { useQueryState } from '@/hooks/use-query-state';
 import type { BreadcrumbItem } from '@/types';
 
 type Employee = {
@@ -69,7 +70,7 @@ export default function EmployeesIndex({
 }) {
     useFlashToast();
     const can = useCan();
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useQueryState('q', '');
     const [editing, setEditing] = useState<Employee | null>(null);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [deleting, setDeleting] = useState<Employee | null>(null);
@@ -227,6 +228,7 @@ export default function EmployeesIndex({
                                                 <Button
                                                     variant="ghost"
                                                     size="icon"
+                                                    aria-label={`Edit ${employee.name}`}
                                                     onClick={() =>
                                                         openEdit(employee)
                                                     }
@@ -238,6 +240,7 @@ export default function EmployeesIndex({
                                                 <Button
                                                     variant="ghost"
                                                     size="icon"
+                                                    aria-label={`Delete ${employee.name}`}
                                                     onClick={() =>
                                                         setDeleting(employee)
                                                     }

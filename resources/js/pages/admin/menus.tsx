@@ -493,6 +493,7 @@ function MenuRowView({
             <button
                 type="button"
                 className="text-muted-foreground cursor-grab touch-none active:cursor-grabbing"
+                aria-label={`Reorder ${item.title}`}
                 {...attributes}
                 {...listeners}
             >
@@ -507,17 +508,32 @@ function MenuRowView({
             )}
             <div className="flex gap-1">
                 {onAddChild && canCreate && (
-                    <Button variant="ghost" size="icon" onClick={onAddChild}>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={onAddChild}
+                        aria-label={`Add submenu under ${item.title}`}
+                    >
                         <Plus />
                     </Button>
                 )}
                 {canEdit && (
-                    <Button variant="ghost" size="icon" onClick={onEdit}>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={onEdit}
+                        aria-label={`Edit ${item.title}`}
+                    >
                         <Pencil />
                     </Button>
                 )}
                 {canDelete && (
-                    <Button variant="ghost" size="icon" onClick={onDelete}>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={onDelete}
+                        aria-label={`Delete ${item.title}`}
+                    >
                         <Trash2 />
                     </Button>
                 )}

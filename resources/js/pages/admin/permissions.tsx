@@ -99,6 +99,7 @@ export default function Permissions({
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
+                                                aria-label={`Edit ${permission.name}`}
                                                 onClick={() =>
                                                     openEdit(permission)
                                                 }
@@ -110,6 +111,7 @@ export default function Permissions({
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
+                                                aria-label={`Delete ${permission.name}`}
                                                 onClick={() =>
                                                     setDeleting(permission)
                                                 }

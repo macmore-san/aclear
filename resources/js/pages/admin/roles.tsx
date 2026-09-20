@@ -144,6 +144,7 @@ export default function Roles({ roles, permissions }: PageProps) {
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
+                                                        aria-label={`Edit ${role.name}`}
                                                         onClick={() =>
                                                             openEdit(role)
                                                         }
@@ -155,6 +156,7 @@ export default function Roles({ roles, permissions }: PageProps) {
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
+                                                        aria-label={`Delete ${role.name}`}
                                                         onClick={() =>
                                                             setDeleting(role)
                                                         }
