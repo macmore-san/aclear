@@ -1,5 +1,4 @@
 import { Link } from '@inertiajs/react';
-import AppLogoIcon from '@/components/app-logo-icon';
 import { home } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
 
@@ -20,9 +19,16 @@ export default function AuthSimpleLayout({
                             href={home()}
                             className="text-primary flex flex-col items-center gap-2"
                         >
-                            <div className="bg-primary text-primary-foreground flex size-11 items-center justify-center rounded-sm">
-                                <AppLogoIcon className="size-6" />
-                            </div>
+                            {/* The full lockup, not the square mark: this page has
+                                the room for the wordmark, and nothing else here
+                                spells out the station's name on screen. */}
+                            <img
+                                src="/logo-full.png"
+                                alt=""
+                                width={600}
+                                height={578}
+                                className="h-20 w-auto rounded-md"
+                            />
                             <span className="sr-only">AClear</span>
                         </Link>
                         <div className="space-y-1">

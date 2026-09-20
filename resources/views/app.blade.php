@@ -31,7 +31,7 @@
         </style>
 
         <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="/logo-mark.png" type="image/png" sizes="512x512">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         <link rel="preload" href="/fonts/author-700.woff2" as="font" type="font/woff2" crossorigin>

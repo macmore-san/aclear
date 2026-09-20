@@ -129,6 +129,13 @@ Unchanged from the prior world except where noted below — this was a token-lev
 - Single-column page shells with a `RegisterHeader` masthead first on every page; the DTR screen keeps its two-column filter-rail + preview layout.
 - Flat depth model: blocks are set apart by a 1px `border` + `bg-card`, never a `box-shadow`.
 - `--radius` raised from `0.25rem` to `0.5rem` — the client's ocean-blue/sea-green system reads as a standard dashboard product, not a printed form, so corners soften accordingly. `rounded-lg`/`md`/`sm` derive from it as before.
+- **The brand mark is real artwork, not a glyph.** `app-logo-icon.tsx` renders
+  `public/logo-mark.png` — the client's `A`-and-wave logo on its own deep-blue ground
+  (`#1B439B`), derived from the supplied `Logo.jpg`. It is raster and carries its own
+  background, so it ignores `currentColor`: never wrap it in a tinted tile (that
+  double-stacks two blues) and never hand it `fill-*` / `text-*` classes. The auth
+  screen uses the full lockup (`public/logo-full.png`) instead, where the wordmark has
+  room to read. This replaces the earlier placeholder water-drop-in-a-seal-ring glyph.
 - `StatusSeal` (`resources/js/components/status-seal.tsx`) is unchanged in structure (filled ring = on-file, dashed ring = pending) and now draws in Light Sea Green / amber instead of the old green/amber pair.
 - `RegisterHeader`, ruled tables, and `nav-main.tsx`'s divided sidebar rows are unchanged in markup; they inherit the new tokens automatically.
 
