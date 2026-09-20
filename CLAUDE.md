@@ -340,6 +340,31 @@ with `php artisan wayfinder:generate --with-form` (matching `vite.config.ts`'s
   builds every employee's page in a loop. Fine at small-business headcount;
   move to a queued job (pattern: the DOH project's `GenerateBatchDtrV2Job`) if
   that ever changes.
+- **The self-update mechanism has three constraints that look like bugs if you
+  "fix" them.** (1) `UpdateController` must never apply the update itself — PHP
+  cannot overwrite the files it is executing, so it stages the zip and hands off
+  to a detached `run-update.ps1`. (2) Progress is polled from
+  `public/update-status.php`, which deliberately does **not** boot Laravel: the
+  app is in maintenance mode (503) and half-overwritten while the update runs.
+  (3) Update state lives in `%ProgramData%\AClear\` (`App\Support\UpdatePaths`),
+  **not** `storage/` — a release zip contains `storage/`, so the extract would
+  delete the status file being polled. `UpdatePaths::stateDir()` is duplicated in
+  `public/update-status.php` on purpose; change one, change the other.
+- **A release zip (~40MB) is uploaded through the browser**, so `php.ini`'s
+  `upload_max_filesize` and `post_max_size` gate it. PHP discards an over-limit
+  upload silently — the request just arrives with no file — which is why the
+  Updates page displays the server's limit and warns below 128M. README §3 sets
+  both; the old 25M value would have broken the page.
+- **Laragon can have several PHP versions installed side by side**, so anything
+  that resolves a `php.exe` path must not take the first `C:\laragon\bin\php\php-*`
+  match — enumeration is alphabetical, which picks 8.3 over 8.4. The installer
+  takes the highest and makes the operator confirm it, because the highest
+  installed version still isn't necessarily the one Apache serves. The app needs
+  PHP >= 8.3 (`composer.json`, no platform pin).
+- **`app:create-admin` is used unattended by the installer** (`installer/aclear.iss`)
+  via `--name --email --password`. Keep those options working; without all three
+  it falls back to prompting, which would hang a silent install.
+
 - **The dashboard's `incompleteThisCutoff` runs one `DtrService::build` per
   active employee per page load** — see the `// ponytail:` comment on
   `DashboardController`. Fine at small-business headcount; revisit if

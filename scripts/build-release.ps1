@@ -32,7 +32,7 @@ try {
     Invoke-Step 'npm ci' { npm ci }
     Invoke-Step 'npm run build' { npm run build }
 
-    Copy-Item scripts\update.bat, scripts\verify-release.ps1 -Destination .
+    Copy-Item scripts\update.bat, scripts\verify-release.ps1, scripts\run-update.ps1 -Destination .
 
     $strip = @(
         'node_modules', 'tests', '.github', '.git', 'scripts', 'resources\js', 'resources\css',
@@ -45,6 +45,10 @@ try {
     foreach ($path in $strip) {
         if (Test-Path $path) { Remove-Item $path -Recurse -Force }
     }
+
+    # config/app.php reads this, the Updates page compares against it, and the
+    # uploaded zip's copy is what run-update.ps1 reports as the new version.
+    Set-Content VERSION $Version -Encoding ascii -NoNewline
 
     # Hashes of the code a client could edit — `verify-release.ps1` flags any change on a support visit.
     $prefix = (Resolve-Path $work).Path.TrimEnd('\') + '\'

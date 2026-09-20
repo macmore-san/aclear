@@ -14,7 +14,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Artisan::command('app:create-admin', function () {
+Artisan::command('app:create-admin {--name=} {--email=} {--password=}', function () {
     $role = Role::where('name', 'Super Admin')->first();
 
     if ($role === null) {
@@ -23,12 +23,22 @@ Artisan::command('app:create-admin', function () {
         return 1;
     }
 
-    $input = [
-        'name' => $this->ask('Name'),
-        'email' => $this->ask('Email'),
-        'password' => $this->secret('Password'),
-        'password_confirmation' => $this->secret('Confirm password'),
-    ];
+    // All three flags supplied = the installer is driving this; otherwise prompt as
+    // before. Partially-supplied flags still prompt for the rest rather than failing,
+    // so a half-remembered command line doesn't error out mid-install.
+    $name = $this->option('name');
+    $email = $this->option('email');
+    $password = $this->option('password');
+    $unattended = $name !== null && $email !== null && $password !== null;
+
+    $input = $unattended
+        ? ['name' => $name, 'email' => $email, 'password' => $password, 'password_confirmation' => $password]
+        : [
+            'name' => $name ?? $this->ask('Name'),
+            'email' => $email ?? $this->ask('Email'),
+            'password' => $password ?? $this->secret('Password'),
+            'password_confirmation' => $password ?? $this->secret('Confirm password'),
+        ];
 
     // Same rules as creating a user from Access Control → Users.
     $rules = new class
@@ -58,7 +68,7 @@ Artisan::command('app:create-admin', function () {
     $this->info("Super Admin {$user->email} created.");
 
     return 0;
-})->purpose('Create a Super Admin account (production install)');
+})->purpose('Create a Super Admin account (production install; pass --name --email --password to skip prompts)');
 
 Artisan::command('app:backup', function () {
     /** @var array{driver: string, host: string, port: int|string, database: string, username: string, password: string} $db */
